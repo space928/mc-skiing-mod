@@ -30,7 +30,7 @@ public class ItemSkis extends ItemBase{
         this.type = type;
         super.setCreativeTab(SKIING_MOD_TAB);
         this.maxStackSize = 1;
-        this.setUnlocalizedName("skis_" + type.getName());
+        this.setTranslationKey("skis_" + type.getName());
     }
 
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer entityPlayer, EnumHand enumHand) {
@@ -47,7 +47,7 @@ public class ItemSkis extends ItemBase{
         float sinPlayerPitch = MathHelper.sin(-playerPitch * 0.017453292F);
         float sinYawXCosPitch = sinPlayerYaw * cosPlayerPitch;
         float cosYawXCostPitch = cosPlayerYaw * cosPlayerPitch;
-        Vec3d playerCoordWithDirection = playerCoords.addVector((double)sinYawXCosPitch * 5.0D, (double)sinPlayerPitch * 5.0D, (double)cosYawXCostPitch * 5.0D);
+        Vec3d playerCoordWithDirection = playerCoords.add((double)sinYawXCosPitch * 5.0D, (double)sinPlayerPitch * 5.0D, (double)cosYawXCostPitch * 5.0D);
         RayTraceResult rayTraceResult = world.rayTraceBlocks(playerCoords, playerCoordWithDirection, true);
         if (rayTraceResult == null) {
             return new ActionResult(EnumActionResult.PASS, heldItem);

@@ -27,7 +27,7 @@ public abstract class ItemPickaxeBase extends ItemPickaxe implements IRegisterab
 	@Override
 	public void updateRegistryAndLocalizedName(String name) {
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		
 		ItemsRegistry.ITEMS.add(this);
 	}

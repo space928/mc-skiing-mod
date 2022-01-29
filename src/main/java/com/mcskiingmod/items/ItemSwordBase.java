@@ -26,7 +26,7 @@ public abstract class ItemSwordBase extends ItemSword implements IRegisterable<I
 	@Override
 	public void updateRegistryAndLocalizedName(String name) {
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		
 		ItemsRegistry.ITEMS.add(this);
 	}
