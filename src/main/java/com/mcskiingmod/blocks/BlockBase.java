@@ -15,53 +15,49 @@ import net.minecraft.item.ItemBlock;
  * Base class for all blocks defined by mc-skiing-mod
  * Implements the methods necessary for registration by Forge.
  */
-public class BlockBase extends Block implements IRegisterable<BlockBase>
-{
+public class BlockBase extends Block implements IRegisterable<BlockBase> {
 
-	protected String name;
-	
-	public BlockBase(Material material, String name) {
-		super(material);
+    protected String name;
 
-    updateRegistryAndLocalizedName(name);
+    public BlockBase(Material material, String name) {
+        super(material);
 
-		this.name = name;
-		
-		BlocksRegistry.BLOCKS.add(this);
-	}
-	
-  public void registerItemModel(Item itemBlock) {
-		Main.proxy.registerItemRenderer(itemBlock, CreativeTabs.BUILDING_BLOCKS, name);
-	}
+        updateRegistryAndLocalizedName(name);
+    }
 
-	public Item createItemBlock() {
-		ItemBlock itemBlock = new ItemMachineBlock(this);
-		itemBlock.setRegistryName(getRegistryName());
-		return itemBlock;
-	}
+    public void registerItemModel(Item itemBlock) {
+        Main.proxy.registerItemRenderer(itemBlock, CreativeTabs.BUILDING_BLOCKS, name);
+    }
 
-	///// Interface implementations
-	@Override
-	public BlockBase setCreativeTab(CreativeTabs tab) {
-		super.setCreativeTab(tab);
-		return this;
-	}
+    public Item createItemBlock() {
+        ItemBlock itemBlock = new ItemMachineBlock(this);
+        itemBlock.setRegistryName(getRegistryName());
+        return itemBlock;
+    }
 
-	@Override public void registerItemModel()
-	{
-		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), CreativeTabs.BUILDING_BLOCKS, name);
-	}
+    ///// Interface implementations
+    @Override
+    public BlockBase setCreativeTab(CreativeTabs tab) {
+        super.setCreativeTab(tab);
+        return this;
+    }
 
-	@Override public void updateRegistryAndLocalizedName(String name)
-	{
-		setUnlocalizedName(name);
-		setRegistryName(name);
+    @Override
+    public void registerItemModel() {
+        Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), CreativeTabs.BUILDING_BLOCKS, name);
+    }
 
-		BlocksRegistry.BLOCKS.add(this);
-	}
+    @Override
+    public void updateRegistryAndLocalizedName(String name) {
+        setUnlocalizedName(name);
+        setRegistryName(name);
 
-	@Override public BlockBase getRegistrableObject()
-	{
-		return this;
-	}
+        this.name = name;
+        BlocksRegistry.BLOCKS.add(this);
+    }
+
+    @Override
+    public BlockBase getRegistrableObject() {
+        return this;
+    }
 }
