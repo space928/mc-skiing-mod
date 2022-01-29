@@ -1,14 +1,18 @@
 package com.mcskiingmod;
 
 
+import com.mcskiingmod.client.renderer.entity.RenderSkis;
+import com.mcskiingmod.entity.EntitySkis;
 import com.mcskiingmod.init.BlocksRegistry;
 import com.mcskiingmod.init.ItemsRegistry;
 import com.mcskiingmod.proxy.CommonProxy;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.entity.RenderBoat;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -38,6 +42,7 @@ public class Main {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		RenderingRegistry.registerEntityRenderingHandler(EntitySkis.class, RenderSkis::new);
 		
 	}
 	
