@@ -3,9 +3,11 @@ package com.mcskiingmod.items;
 import com.mcskiingmod.Main;
 import com.mcskiingmod.init.ItemsRegistry;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemSword;
 
-public abstract class ItemSwordBase extends ItemSword implements IRegisterable {
+public abstract class ItemSwordBase extends ItemSword implements IRegisterable<Item> {
 
 	protected String name;
 	
@@ -26,5 +28,10 @@ public abstract class ItemSwordBase extends ItemSword implements IRegisterable {
 		setUnlocalizedName(name);
 		
 		ItemsRegistry.ITEMS.add(this);
+	}
+
+	@Override public ItemSwordBase getRegistrableObject()
+	{
+		return this;
 	}
 }

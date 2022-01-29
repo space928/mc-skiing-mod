@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class EntityBase extends Entity implements IRegisterable<EntityBase>, ICreativeTabbable<EntityBase>
+public class EntityBase extends Entity implements IRegisterable<Entity>, ICreativeTabbable<EntityBase>
 {
     public EntityBase(World worldIn)
     {
@@ -27,6 +27,11 @@ public class EntityBase extends Entity implements IRegisterable<EntityBase>, ICr
     @Override public void updateRegistryAndLocalizedName(String name)
     {
 
+    }
+
+    @Override public Entity getRegistrableObject()
+    {
+        return this;
     }
 
     @Override protected void entityInit()

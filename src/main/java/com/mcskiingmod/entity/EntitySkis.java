@@ -34,6 +34,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
+//TODO: Check this reference for correct registration of entities:
+// https://github.com/TheGreyGhost/MinecraftByExample/tree/master/src/main/java/minecraftbyexample/mbe81_entity_projectile
+// We use the more up to date MCP mappings (close to 1.16) but we run in Forge 1.12 so a combination of the 1.16 and 1.12 branches may be approriate.
+
 public class EntitySkis extends EntityBase {
     private static final DataParameter<Integer> TIME_SINCE_HIT = EntityDataManager.<Integer>createKey(EntityBoat.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> FORWARD_DIRECTION = EntityDataManager.<Integer>createKey(EntityBoat.class, DataSerializers.VARINT);
