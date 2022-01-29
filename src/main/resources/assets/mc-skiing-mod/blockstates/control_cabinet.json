@@ -1,0 +1,33 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "mc-skiing-mod:control_cabinet",
+		"textures": {
+			"concrete_yellow": "minecraft:blocks/concrete_yellow",
+			"concrete_blue": "minecraft:blocks/concrete_blue",
+			"concrete_white": "minecraft:blocks/concrete_white",
+			"concrete_red": "minecraft:blocks/concrete_red"
+		}
+	},
+	"variants": {
+		"facing": {
+			"north": {},
+			"south": {"y": 180},
+			"east":  {"y": 90},
+			"west":  {"y": -90}
+		},
+		"active": {
+			"true": {
+				"textures": {
+					"concrete_yellow": "minecraft:blocks/concrete_yellow",
+					"concrete_blue": "minecraft:blocks/concrete_blue",
+					"concrete_white": "minecraft:blocks/concrete_white",
+					"concrete_red": "minecraft:blocks/concrete_red"
+				}
+			},
+			"false": {}
+		},
+		"inventory": [{}],
+		"normal": [{}]
+	}
+}

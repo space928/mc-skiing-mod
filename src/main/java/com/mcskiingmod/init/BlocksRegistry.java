@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import com.mcskiingmod.blocks.BlockBase;
 import com.mcskiingmod.blocks.BlockCompressedCobblestone;
 
+import com.mcskiingmod.blocks.BlockControlCabinet;
 import com.mcskiingmod.items.IRegisterable;
+import com.mcskiingmod.blocks.BlockControlCabinet;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.FMLLog;
@@ -17,6 +19,8 @@ import org.apache.logging.log4j.Level;
  */
 public class BlocksRegistry {
 	public static final ArrayList<IRegisterable<BlockBase>> BLOCKS = new ArrayList<>();
+	public static final BlockCompressedCobblestone compressedCobblestone = new BlockCompressedCobblestone("compressed_cobblestone");
+	public static final BlockControlCabinet controlCabinet = new BlockControlCabinet("control_cabinet");
 
 	// =============== Instantiate all blocks to be registered
 	//This still seems to have a bug with not being registered properly. It doesn't seem point to the correct resource?
