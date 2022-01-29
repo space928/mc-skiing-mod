@@ -64,11 +64,9 @@ public class Main {
 	public void serverStarting(FMLServerStartingEvent event) {
 		
 	}
-	
+
 	/**
-	 * This is something we need to immediately load in our event bus at mod construction time (built)
-	 * @author ezric
-	 *
+	 * Class for handling all the Forge registration events of the mod.
 	 */
 	@EventBusSubscriber
 	public static class RegistrationHandler{
@@ -93,6 +91,11 @@ public class Main {
 				String message = ex.getMessage();
 				throw ex;
 			}
+		}
+
+		@SubscribeEvent
+		public static void registerEntity() {
+
 		}
 		
 		@SubscribeEvent

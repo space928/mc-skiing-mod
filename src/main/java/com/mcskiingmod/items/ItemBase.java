@@ -6,28 +6,36 @@ import com.mcskiingmod.init.ItemsRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class ItemBase extends Item implements IRegisterable, ICreativeTabbable {
+/**
+ * Base class for all items defined by mc-skiing-mod
+ * Implements the methods necessary for registration by Forge.
+ */
+public class ItemBase extends Item implements IRegisterable<Item>, ICreativeTabbable<ItemBase> {
 	
-	protected String name;	
-	
+	protected String name;
+
+	/**
+	 * Constructs a new item with a given name and registers it automatically.
+	 * @param name registry and localisation name of the item
+	 */
 	public ItemBase(String name) {
 		this.name = name;	
 		
 		updateRegistryAndLocalizedName(name);
 	}
-	
-	public void registerItemModel() {
-		Main.proxy.registerItemRenderer(this, 0, name);
-	}
 
-	
-	public ItemBase(ToolMaterial material, String name) {
-		this.name = name;
-	}
-	
+	/**
+	 * Sets which tab the item belongs to.
+	 * @param tab creative menu tab to assign the item to
+	 * @return itself
+	 */
 	public ItemBase setCreativeTab(CreativeTabs tab) {
 		super.setCreativeTab(tab);
 		return this;
+	}
+
+	public void registerItemModel() {
+		Main.proxy.registerItemRenderer(this, 0, name);
 	}
 	
 	@Override
@@ -38,5 +46,10 @@ public class ItemBase extends Item implements IRegisterable, ICreativeTabbable {
 		setRegistryName(name);
 		
 		ItemsRegistry.ITEMS.add(this);
-	}	
+	}
+
+	@Override public ItemBase getRegistrableObject()
+	{
+		return this;
+	}
 }
