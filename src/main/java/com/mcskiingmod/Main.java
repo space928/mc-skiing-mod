@@ -92,10 +92,10 @@ public class Main {
 			}
 		}
 
-		@SubscribeEvent
+		/*@SubscribeEvent
 		public static void registerEntity() {
 
-		}
+		}*/
 		
 		@SubscribeEvent
 		public static void registerItems(ModelRegistryEvent event) {
