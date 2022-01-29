@@ -13,7 +13,7 @@ public class SkiingModTab extends CreativeTabs {
     }
 
     @Override
-    public ItemStack getTabIconItem() {
+    public ItemStack createIcon() {
         return new ItemStack(ItemsRegistry.skis);
     }
 }

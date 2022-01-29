@@ -49,7 +49,7 @@ public class BlockBase extends Block implements IRegisterable<BlockBase> {
 
     @Override
     public void updateRegistryAndLocalizedName(String name) {
-        setUnlocalizedName(name);
+        setTranslationKey(name);
         setRegistryName(name);
 
         this.name = name;

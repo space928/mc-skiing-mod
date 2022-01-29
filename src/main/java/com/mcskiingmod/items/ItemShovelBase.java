@@ -27,7 +27,7 @@ public abstract class ItemShovelBase extends ItemSpade implements IRegisterable<
 	@Override
 	public void updateRegistryAndLocalizedName(String name) {
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		
 		ItemsRegistry.ITEMS.add(this);
 	}

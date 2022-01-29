@@ -79,7 +79,7 @@ public class BlockControlCabinet extends BlockBase {
 				resultClosest = result;
 			}
 		}
-		return resultClosest == null ? null : new RayTraceResult(RayTraceResult.Type.BLOCK, resultClosest.hitVec.addVector(pos.getX(), pos.getY(), pos.getZ()), resultClosest.sideHit, pos);
+		return resultClosest == null ? null : new RayTraceResult(RayTraceResult.Type.BLOCK, resultClosest.hitVec.add(pos.getX(), pos.getY(), pos.getZ()), resultClosest.sideHit, pos);
 	}
 
 }

@@ -41,7 +41,7 @@ public class ItemBase extends Item implements IRegisterable<Item>, ICreativeTabb
 	@Override
 	public void updateRegistryAndLocalizedName(String name) {
 		//used for language files
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		//used for registering the item and its models
 		setRegistryName(name);
 		
