@@ -23,10 +23,6 @@ public class ItemBase extends Item implements IRegisterable<Item>, ICreativeTabb
 		
 		updateRegistryAndLocalizedName(name);
 	}
-  
-	public void registerItemModel() {
-		Main.proxy.registerItemRenderer(this, CreativeTabs.BUILDING_BLOCKS, name);
-	}
 
 	/**
 	 * Sets which tab the item belongs to.
@@ -39,7 +35,7 @@ public class ItemBase extends Item implements IRegisterable<Item>, ICreativeTabb
 	}
 
 	public void registerItemModel() {
-		Main.proxy.registerItemRenderer(this, 0, name);
+		Main.proxy.registerItemRenderer(this, CreativeTabs.BUILDING_BLOCKS, name);
 	}
 	
 	@Override
