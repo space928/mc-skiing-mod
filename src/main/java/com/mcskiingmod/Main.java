@@ -5,11 +5,14 @@ import com.mcskiingmod.client.renderer.entity.RenderSkis;
 import com.mcskiingmod.entity.EntitySkis;
 import com.mcskiingmod.init.BlocksRegistry;
 import com.mcskiingmod.init.ItemsRegistry;
+import com.mcskiingmod.items.ItemSkis;
 import com.mcskiingmod.proxy.CommonProxy;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.RenderBoat;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -30,7 +33,8 @@ public class Main {
 	public static final String MOD_ID = "mc-skiing-mod";
 	public static final String VERSION = "1.0";
 	public static final String NAME = "Thomas' Skiing Mod";
-	
+	public static final CreativeTabs SKIING_MOD_TAB = new SkiingModTab("SkiingMod");
+
 	@Instance
 	public static Main main;	
 	
@@ -100,3 +104,4 @@ public class Main {
 		
 	}
 }
+

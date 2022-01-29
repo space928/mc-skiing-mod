@@ -20,13 +20,15 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+import static com.mcskiingmod.Main.SKIING_MOD_TAB;
+
 public class ItemSkis extends ItemBase{
     private final EntityBoat.Type type;
 
     public ItemSkis(String name, EntityBoat.Type type) {
         super(name);
         this.type = type;
-        super.setCreativeTab(CreativeTabs.TRANSPORTATION);
+        super.setCreativeTab(SKIING_MOD_TAB);
         this.maxStackSize = 1;
         this.setUnlocalizedName("skis_" + type.getName());
     }
