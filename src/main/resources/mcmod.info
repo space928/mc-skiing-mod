@@ -1,14 +1,14 @@
 [
 {
-  "modid": "template_mod",
-  "name": "Forge Template Mod",
-  "description": "Example forge mod.",
+  "modid": "mc-skiing-mod",
+  "name": "Thomas' Skiing Mod",
+  "description": "Shred the slopes in style with the Minecraft Skiing Mod!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Thomas Mathieson"],
+  "credits": "",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
