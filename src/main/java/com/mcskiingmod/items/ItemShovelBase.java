@@ -4,9 +4,11 @@ import com.mcskiingmod.Main;
 import com.mcskiingmod.init.ItemsRegistry;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemSpade;
 
-public abstract class ItemShovelBase extends ItemSpade implements IRegisterable {
+public abstract class ItemShovelBase extends ItemSpade implements IRegisterable<Item> {
 
 	protected String name;
 	
@@ -28,5 +30,10 @@ public abstract class ItemShovelBase extends ItemSpade implements IRegisterable 
 		setUnlocalizedName(name);
 		
 		ItemsRegistry.ITEMS.add(this);
+	}
+
+	@Override public ItemShovelBase getRegistrableObject()
+	{
+		return this;
 	}
 }

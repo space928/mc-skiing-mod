@@ -4,9 +4,11 @@ import com.mcskiingmod.Main;
 import com.mcskiingmod.init.ItemsRegistry;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 
-public abstract class ItemPickaxeBase extends ItemPickaxe implements IRegisterable {
+public abstract class ItemPickaxeBase extends ItemPickaxe implements IRegisterable<Item> {
 
 	protected String name;
 	
@@ -28,5 +30,10 @@ public abstract class ItemPickaxeBase extends ItemPickaxe implements IRegisterab
 		setUnlocalizedName(name);
 		
 		ItemsRegistry.ITEMS.add(this);
+	}
+
+	@Override public ItemPickaxeBase getRegistrableObject()
+	{
+		return this;
 	}
 }
