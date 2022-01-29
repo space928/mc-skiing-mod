@@ -18,12 +18,14 @@ public class BlockBase extends Block {
 
 		setUnlocalizedName(name);
 		setRegistryName(name);
+
+		this.name = name;
 		
 		BlocksRegistry.BLOCKS.add(this);
 	}
 	
 	public void registerItemModel(Item itemBlock) {
-		Main.proxy.registerItemRenderer(itemBlock, 0, name);
+		Main.proxy.registerItemRenderer(itemBlock, CreativeTabs.BUILDING_BLOCKS, name);
 	}
 	
 	public Item createItemBlock() {
@@ -31,7 +33,7 @@ public class BlockBase extends Block {
 		itemBlock.setRegistryName(getRegistryName());
 		return itemBlock;
 	}
-	
+
 	@Override
 	public BlockBase setCreativeTab(CreativeTabs tab) {
 		super.setCreativeTab(tab);

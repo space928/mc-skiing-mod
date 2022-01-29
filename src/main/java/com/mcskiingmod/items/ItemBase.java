@@ -17,7 +17,7 @@ public class ItemBase extends Item implements IRegisterable, ICreativeTabbable {
 	}
 	
 	public void registerItemModel() {
-		Main.proxy.registerItemRenderer(this, 0, name);
+		Main.proxy.registerItemRenderer(this, CreativeTabs.BUILDING_BLOCKS, name);
 	}
 
 	
