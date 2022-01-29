@@ -49,7 +49,7 @@ public class BlockBase extends Block implements IRegisterable<BlockBase>
 
 	@Override public void registerItemModel()
 	{
-		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, name);
+		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), CreativeTabs.BUILDING_BLOCKS, name);
 	}
 
 	@Override public void updateRegistryAndLocalizedName(String name)
