@@ -3,6 +3,7 @@ package com.mcskiingmod.items;
 import com.mcskiingmod.Main;
 import com.mcskiingmod.init.ItemsRegistry;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
@@ -20,7 +21,7 @@ public abstract class ItemAxeBase extends ItemAxe implements IRegisterable<Item>
 	}
 	
 	public void registerItemModel() {
-		Main.proxy.registerItemRenderer(this, 0, name);
+		Main.proxy.registerItemRenderer(this, CreativeTabs.COMBAT, name);
 	}
 
 	@Override

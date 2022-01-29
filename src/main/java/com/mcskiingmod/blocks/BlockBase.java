@@ -22,7 +22,13 @@ public class BlockBase extends Block implements IRegisterable<BlockBase>
 	public BlockBase(Material material, String name) {
 		super(material);
 
-		updateRegistryAndLocalizedName(name);
+    updateRegistryAndLocalizedName(name);
+
+		this.name = name;
+	}
+	
+  public void registerItemModel(Item itemBlock) {
+		Main.proxy.registerItemRenderer(itemBlock, CreativeTabs.BUILDING_BLOCKS, name);
 	}
 
 	public Item createItemBlock() {

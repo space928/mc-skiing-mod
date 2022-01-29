@@ -1,5 +1,6 @@
 package com.mcskiingmod.proxy;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 /**
@@ -9,8 +10,8 @@ import net.minecraft.item.Item;
  */
 public class CommonProxy {
 
-	public void registerItemRenderer(Item item, int creativeTabValue, String name) {
-		
+	public void registerItemRenderer(Item item, CreativeTabs creativeTabValue, String name) {
+
 	}
 
 }

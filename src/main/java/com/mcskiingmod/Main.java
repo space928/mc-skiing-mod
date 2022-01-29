@@ -46,7 +46,6 @@ public class Main {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		RenderingRegistry.registerEntityRenderingHandler(EntitySkis.class, RenderSkis::new);
 		
 	}
 	
