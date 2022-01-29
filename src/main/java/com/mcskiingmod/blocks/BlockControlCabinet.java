@@ -2,21 +2,25 @@ package com.mcskiingmod.blocks;
 
 import com.google.common.collect.Lists;
 import com.mcskiingmod.Main;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockControlCabinet extends BlockBase {
-
+public class BlockControlCabinet extends BlockBase implements ITileEntityProvider {
 	private static final AxisAlignedBB CABINET_BASE = new AxisAlignedBB(0, 0, 0, 1, 1.938, 0.875);
 	private static final AxisAlignedBB LID = new AxisAlignedBB(0, 1.938, 0, 1, 2, 1);
 	private static final AxisAlignedBB CABNET_HANDLE = new AxisAlignedBB(0.062, 0.75, 0.875, 0.125, 0.938, 0.906);
@@ -82,4 +86,28 @@ public class BlockControlCabinet extends BlockBase {
 		return resultClosest == null ? null : new RayTraceResult(RayTraceResult.Type.BLOCK, resultClosest.hitVec.add(pos.getX(), pos.getY(), pos.getZ()), resultClosest.sideHit, pos);
 	}
 
+	@Nullable
+	@Override
+	public TileEntity createNewTileEntity(World world, int i) {
+		return new TileEntity() {
+			private final BaseEnergyContainer container = new BaseEnergyContainer();
+
+			@Override
+			public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+				if(capability == CapabilityEnergy.ENERGY)
+					return true;
+
+				return super.hasCapability(capability, facing);
+			}
+
+			@Nullable
+			@Override
+			public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+				if((facing == EnumFacing.DOWN || facing == EnumFacing.NORTH || facing == EnumFacing.WEST) && capability == CapabilityEnergy.ENERGY)
+					return (T) this.container;
+
+				return super.getCapability(capability, facing);
+			}
+		};
+	}
 }
