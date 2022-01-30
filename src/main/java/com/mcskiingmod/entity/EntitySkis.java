@@ -39,11 +39,11 @@ import java.util.List;
 // We use the more up to date MCP mappings (close to 1.16) but we run in Forge 1.12 so a combination of the 1.16 and 1.12 branches may be approriate.
 
 public class EntitySkis extends EntityBase {
-    private static final DataParameter<Integer> TIME_SINCE_HIT = EntityDataManager.<Integer>createKey(EntityBoat.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> FORWARD_DIRECTION = EntityDataManager.<Integer>createKey(EntityBoat.class, DataSerializers.VARINT);
-    private static final DataParameter<Float> DAMAGE_TAKEN = EntityDataManager.<Float>createKey(EntityBoat.class, DataSerializers.FLOAT);
-    private static final DataParameter<Integer> BOAT_TYPE = EntityDataManager.<Integer>createKey(EntityBoat.class, DataSerializers.VARINT);
-    private static final DataParameter<Boolean>[] DATA_ID_PADDLE = new DataParameter[] {EntityDataManager.createKey(EntityBoat.class, DataSerializers.BOOLEAN), EntityDataManager.createKey(EntityBoat.class, DataSerializers.BOOLEAN)};
+    private static final DataParameter<Integer> TIME_SINCE_HIT = EntityDataManager.<Integer>createKey(EntitySkis.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> FORWARD_DIRECTION = EntityDataManager.<Integer>createKey(EntitySkis.class, DataSerializers.VARINT);
+    private static final DataParameter<Float> DAMAGE_TAKEN = EntityDataManager.<Float>createKey(EntitySkis.class, DataSerializers.FLOAT);
+    private static final DataParameter<Integer> BOAT_TYPE = EntityDataManager.<Integer>createKey(EntitySkis.class, DataSerializers.VARINT);
+//    private static final DataParameter<Boolean>[] DATA_ID_PADDLE = new DataParameter[] {EntityDataManager.createKey(EntitySkis.class, DataSerializers.BOOLEAN), EntityDataManager.createKey(EntityBoat.class, DataSerializers.BOOLEAN)};
     private final float[] paddlePositions;
     private float momentum;
     private float outOfControlTicks;
@@ -93,10 +93,10 @@ public class EntitySkis extends EntityBase {
         this.dataManager.register(DAMAGE_TAKEN, Float.valueOf(0.0F));
         this.dataManager.register(BOAT_TYPE, Integer.valueOf(EntityBoat.Type.OAK.ordinal()));
 
-        for (DataParameter<Boolean> dataparameter : DATA_ID_PADDLE)
+        /*for (DataParameter<Boolean> dataparameter : DATA_ID_PADDLE)
         {
             this.dataManager.register(dataparameter, Boolean.valueOf(false));
-        }
+        }*/
     }
 
     @Nullable
@@ -349,8 +349,8 @@ public class EntitySkis extends EntityBase {
 
     public void setPaddleState(boolean left, boolean right)
     {
-        this.dataManager.set(DATA_ID_PADDLE[0], Boolean.valueOf(left));
-        this.dataManager.set(DATA_ID_PADDLE[1], Boolean.valueOf(right));
+        /*this.dataManager.set(DATA_ID_PADDLE[0], Boolean.valueOf(left));
+        this.dataManager.set(DATA_ID_PADDLE[1], Boolean.valueOf(right));*/
     }
 
     @SideOnly(Side.CLIENT)
@@ -855,7 +855,8 @@ public class EntitySkis extends EntityBase {
 
     public boolean getPaddleState(int side)
     {
-        return ((Boolean)this.dataManager.get(DATA_ID_PADDLE[side])).booleanValue() && this.getControllingPassenger() != null;
+//        return ((Boolean)this.dataManager.get(DATA_ID_PADDLE[side])).booleanValue() && this.getControllingPassenger() != null;
+        return false;
     }
 
     public void setDamageTaken(float damageTaken)
