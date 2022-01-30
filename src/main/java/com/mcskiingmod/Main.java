@@ -10,9 +10,11 @@ import com.mcskiingmod.proxy.CommonProxy;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -26,6 +28,9 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod(modid= Main.MOD_ID, version = Main.VERSION, name = Main.NAME)
@@ -90,12 +95,15 @@ public class Main {
 				String message = ex.getMessage();
 				throw ex;
 			}
+
 		}
 
-		/*@SubscribeEvent
-		public static void registerEntity() {
-
-		}*/
+		@SubscribeEvent
+		public static void registerEntity(RegistryEvent.Register<EntityEntry> event) {
+			EntityEntry skisEntityEntry = new EntityEntry(EntitySkis.class, MOD_ID + ":skis")
+					.setRegistryName(MOD_ID + ":skis");
+			event.getRegistry().register(skisEntityEntry);
+		}
 		
 		@SubscribeEvent
 		public static void registerItems(ModelRegistryEvent event) {
