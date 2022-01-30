@@ -122,7 +122,7 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 	@Override
 	public boolean isFullCube(IBlockState state)
 	{
-		return false;
+		return true;
 	}
 
 	// render using a BakedModel (mbe30_inventory_basic.json --> mbe30_inventory_basic_model.json)
@@ -136,13 +136,12 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 	public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState iBlockState, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (player.isSneaking())
 			return false;
-		LOGGER.log(Level.INFO, "EnergyStored: " + this.tileEntityControlCabinet.getContainer().getEnergyStored());
 		for (EnumFacing e: EnumFacing.VALUES) {
-			if (this.tileEntityControlCabinet.getCapability(CapabilityEnergy.ENERGY,e) != null) {
+			if (world.getTileEntity(blockPos).getCapability(CapabilityEnergy.ENERGY,e) != null) {
 				LOGGER.log(Level.INFO, "Energy: " +
-						this.tileEntityControlCabinet.getCapability(CapabilityEnergy.ENERGY, e).getEnergyStored() +
+						world.getTileEntity(blockPos).getCapability(CapabilityEnergy.ENERGY, e).getEnergyStored() +
 						"/" +
-						this.tileEntityControlCabinet.getCapability(CapabilityEnergy.ENERGY, e).getMaxEnergyStored() +
+						world.getTileEntity(blockPos).getCapability(CapabilityEnergy.ENERGY, e).getMaxEnergyStored() +
 						" Face: " +
 						e.name()
 				);

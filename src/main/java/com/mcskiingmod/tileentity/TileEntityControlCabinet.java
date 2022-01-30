@@ -27,7 +27,7 @@ public class TileEntityControlCabinet extends TileEntity implements ITickable, I
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityEnergy.ENERGY)
+        if((facing != EnumFacing.SOUTH) && capability == CapabilityEnergy.ENERGY)
             return true;
 
         return super.hasCapability(capability, facing);
@@ -36,7 +36,7 @@ public class TileEntityControlCabinet extends TileEntity implements ITickable, I
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if((facing == EnumFacing.DOWN || facing == EnumFacing.NORTH || facing == EnumFacing.WEST) && capability == CapabilityEnergy.ENERGY)
+        if((facing != EnumFacing.SOUTH) && capability == CapabilityEnergy.ENERGY)
             return (T) this.getContainer();
 
         return super.getCapability(capability, facing);
