@@ -33,7 +33,7 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 	private static final AxisAlignedBB CABINET_BASE = new AxisAlignedBB(0, 0, 0, 1, 1.938, 0.875);
 	private static final AxisAlignedBB LID = new AxisAlignedBB(0, 1.938, 0, 1, 2, 1);
 	private static final AxisAlignedBB FOOT = new AxisAlignedBB(0, 0, 0.875, 1, 0.062, 1);
-	private TileEntityControlCabinet tileEntityControlCabinet;
+	private final TileEntityControlCabinet tileEntityControlCabinet;
 	/**
 	 * AxisAlignedBBs and methods getBoundingBox, collisionRayTrace, and collisionRayTrace generated using MrCrayfish's Model Creator <a href="https://mrcrayfish.com/tools?id=mc">https://mrcrayfish.com/tools?id=mc</a>
 	 */
