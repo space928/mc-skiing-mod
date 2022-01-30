@@ -9,6 +9,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -17,9 +19,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nullable;
@@ -30,17 +32,12 @@ import static com.mcskiingmod.Main.LOGGER;
 public class BlockControlCabinet extends BlockBase implements ITileEntityProvider {
 	private static final AxisAlignedBB CABINET_BASE = new AxisAlignedBB(0, 0, 0, 1, 1.938, 0.875);
 	private static final AxisAlignedBB LID = new AxisAlignedBB(0, 1.938, 0, 1, 2, 1);
-	private static final AxisAlignedBB CABNET_HANDLE = new AxisAlignedBB(0.062, 0.75, 0.875, 0.125, 0.938, 0.906);
-	private static final AxisAlignedBB CABNET_DISPLAY_PANEL = new AxisAlignedBB(0.062, 1.25, 0.875, 0.938, 1.75, 0.887);
-	private static final AxisAlignedBB CABNET_DISPLAY_ESTOP = new AxisAlignedBB(0.125, 1.312, 0.875, 0.138, 1.325, 0.906);
-	private static final AxisAlignedBB CABNET_DISPLAY_ESTOP2 = new AxisAlignedBB(0.109, 1.297, 0.906, 0.153, 1.341, 0.912);
-	private static final AxisAlignedBB CABNET_DISPLAY_ESTOP3 = new AxisAlignedBB(0.094, 1.281, 0.887, 0.156, 1.344, 0.891);
 	private static final AxisAlignedBB FOOT = new AxisAlignedBB(0, 0, 0.875, 1, 0.062, 1);
 	private TileEntityControlCabinet tileEntityControlCabinet;
 	/**
 	 * AxisAlignedBBs and methods getBoundingBox, collisionRayTrace, and collisionRayTrace generated using MrCrayfish's Model Creator <a href="https://mrcrayfish.com/tools?id=mc">https://mrcrayfish.com/tools?id=mc</a>
 	 */
-	private static final List<AxisAlignedBB> COLLISION_BOXES = Lists.newArrayList(CABINET_BASE, LID, CABNET_HANDLE, CABNET_DISPLAY_PANEL, CABNET_DISPLAY_ESTOP, CABNET_DISPLAY_ESTOP2, CABNET_DISPLAY_ESTOP3, FOOT);
+	private static final List<AxisAlignedBB> COLLISION_BOXES = Lists.newArrayList(CABINET_BASE, LID, FOOT);
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0, 0, 0, 1, 2, 1);
 
 	public BlockControlCabinet(String name) {
@@ -99,6 +96,37 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 	@Override
 	public TileEntity createNewTileEntity(World world, int i) {
 		return tileEntityControlCabinet;
+	}
+
+	// the block will render in the SOLID layer.  See http://greyminecraftcoder.blogspot.co.at/2014/12/block-rendering-18.html for more information.
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer()
+	{
+		return BlockRenderLayer.SOLID;
+	}
+
+	// used by the renderer to control lighting and visibility of other blocks.
+	// set to false because this block doesn't fill the entire 1x1x1 space
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
+	{
+		return false;
+	}
+
+	// used by the renderer to control lighting and visibility of other blocks, also by
+	// (eg) wall or fence to control whether the fence joins itself to this block
+	// set to false because this block doesn't fill the entire 1x1x1 space
+	@Override
+	public boolean isFullCube(IBlockState state)
+	{
+		return false;
+	}
+
+	// render using a BakedModel (mbe30_inventory_basic.json --> mbe30_inventory_basic_model.json)
+	// required because the default (super method) is INVISIBLE for BlockContainers.
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState iBlockState) {
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
