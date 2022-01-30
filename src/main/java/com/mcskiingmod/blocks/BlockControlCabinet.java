@@ -2,12 +2,15 @@ package com.mcskiingmod.blocks;
 
 import com.google.common.collect.Lists;
 import com.mcskiingmod.Main;
+import com.mcskiingmod.tileentity.TileEntityControlCabinet;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -16,9 +19,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.EnergyStorage;
+import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nullable;
 import java.util.List;
+
+import static com.mcskiingmod.Main.LOGGER;
 
 public class BlockControlCabinet extends BlockBase implements ITileEntityProvider {
 	private static final AxisAlignedBB CABINET_BASE = new AxisAlignedBB(0, 0, 0, 1, 1.938, 0.875);
@@ -29,6 +36,7 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 	private static final AxisAlignedBB CABNET_DISPLAY_ESTOP2 = new AxisAlignedBB(0.109, 1.297, 0.906, 0.153, 1.341, 0.912);
 	private static final AxisAlignedBB CABNET_DISPLAY_ESTOP3 = new AxisAlignedBB(0.094, 1.281, 0.887, 0.156, 1.344, 0.891);
 	private static final AxisAlignedBB FOOT = new AxisAlignedBB(0, 0, 0.875, 1, 0.062, 1);
+	private TileEntityControlCabinet tileEntityControlCabinet;
 	/**
 	 * AxisAlignedBBs and methods getBoundingBox, collisionRayTrace, and collisionRayTrace generated using MrCrayfish's Model Creator <a href="https://mrcrayfish.com/tools?id=mc">https://mrcrayfish.com/tools?id=mc</a>
 	 */
@@ -40,6 +48,7 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 		setHardness(3f);
 		setResistance(5f);
 		super.setCreativeTab(Main.SKIING_MOD_TAB);
+		this.tileEntityControlCabinet = new TileEntityControlCabinet();
 
 	}
 
@@ -89,25 +98,22 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 	@Nullable
 	@Override
 	public TileEntity createNewTileEntity(World world, int i) {
-		return new TileEntity() {
-			private final BaseEnergyContainer container = new BaseEnergyContainer();
+		return tileEntityControlCabinet;
+	}
 
-			@Override
-			public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-				if(capability == CapabilityEnergy.ENERGY)
-					return true;
-
-				return super.hasCapability(capability, facing);
+	@Override
+	public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState iBlockState, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		for (EnumFacing e: EnumFacing.VALUES) {
+			if (this.tileEntityControlCabinet.getCapability(CapabilityEnergy.ENERGY,e) != null) {
+				LOGGER.log(Level.INFO, "Energy: " +
+						this.tileEntityControlCabinet.getCapability(CapabilityEnergy.ENERGY, e).getEnergyStored() +
+						"/" +
+						this.tileEntityControlCabinet.getCapability(CapabilityEnergy.ENERGY, e).getMaxEnergyStored() +
+						" Face: " +
+						e.name()
+				);
 			}
-
-			@Nullable
-			@Override
-			public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-				if((facing == EnumFacing.DOWN || facing == EnumFacing.NORTH || facing == EnumFacing.WEST) && capability == CapabilityEnergy.ENERGY)
-					return (T) this.container;
-
-				return super.getCapability(capability, facing);
-			}
-		};
+		}
+		return true;
 	}
 }
