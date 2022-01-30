@@ -29,6 +29,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -100,8 +101,12 @@ public class Main {
 
 		@SubscribeEvent
 		public static void registerEntity(RegistryEvent.Register<EntityEntry> event) {
-			EntityEntry skisEntityEntry = new EntityEntry(EntitySkis.class, MOD_ID + ":skis")
-					.setRegistryName(MOD_ID + ":skis");
+			EntityEntry skisEntityEntry = EntityEntryBuilder.create()
+					.entity(EntitySkis.class)
+					.id(new ResourceLocation(MOD_ID, "skis"), 0)
+					.name("skis")
+					.tracker(64,20,true)
+					.build();
 			event.getRegistry().register(skisEntityEntry);
 		}
 		
