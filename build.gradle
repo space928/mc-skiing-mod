@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net/' }
+        maven { url = 'https://maven.thiakil.com/' }
         mavenCentral()
     }
     dependencies {
@@ -69,6 +70,30 @@ minecraft {
             property 'forge.logging.console.level', 'info'
         }
     }*/
+}
+
+repositories {
+    maven {
+        name 'amadornes'
+        url 'https://maven.amadornes.com/'
+    }
+    maven {
+        name 'opencomputers'
+        url 'https://maven.cil.li/'
+    }
+    maven {
+        name 'thiakil'
+        url 'https://maven.thiakil.com'
+    }
+    maven {
+        name 'hwyla'
+        url 'https://maven.tehnut.info'
+    }
+}
+
+dependencies {
+    compileOnly "dan200.computercraft:ComputerCraft:1.80pr1:api"
+
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
