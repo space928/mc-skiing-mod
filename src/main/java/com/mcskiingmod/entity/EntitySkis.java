@@ -5,6 +5,7 @@ import com.mcskiingmod.init.ItemsRegistry;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
@@ -246,6 +247,7 @@ public class EntitySkis extends EntityBase {
 
             if (this.world.isRemote)
             {
+                updateInputs(Minecraft.getMinecraft().player.movementInput);
                 this.controlBoat();
                 this.world.sendPacketToServer(new CPacketSteerBoat(this.getPaddleState(0), this.getPaddleState(1)));
             }
@@ -908,12 +910,12 @@ public class EntitySkis extends EntityBase {
     }
 
     @SideOnly(Side.CLIENT)
-    public void updateInputs(boolean leftInputDown, boolean rightInputDown, boolean forwardInputDown, boolean backwardInputDown)
+    public void updateInputs(MovementInput movementInput)
     {
-        this.leftInputDown = leftInputDown;
-        this.rightInputDown = rightInputDown;
-        this.forwardInputDown = forwardInputDown;
-        this.backInputDown = backwardInputDown;
+        this.leftInputDown = movementInput.leftKeyDown;
+        this.rightInputDown = movementInput.rightKeyDown;
+        this.forwardInputDown = movementInput.forwardKeyDown;
+        this.backInputDown = movementInput.backKeyDown;
     }
 
     public static enum Status
