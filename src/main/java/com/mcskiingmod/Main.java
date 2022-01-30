@@ -8,12 +8,14 @@ import com.mcskiingmod.init.ItemsRegistry;
 import com.mcskiingmod.items.ItemSkis;
 import com.mcskiingmod.proxy.CommonProxy;
 
+import com.mcskiingmod.tileentity.TileEntityControlCabinet;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -28,11 +30,16 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import static net.minecraft.launchwrapper.LogWrapper.log;
 
 @Mod(modid= Main.MOD_ID, version = Main.VERSION, name = Main.NAME)
 public class Main {
@@ -40,6 +47,7 @@ public class Main {
 	public static final String VERSION = "1.0";
 	public static final String NAME = "Thomas' Skiing Mod";
 	public static final CreativeTabs SKIING_MOD_TAB = new SkiingModTab("SkiingMod");
+	public static final Logger LOGGER = LogManager.getLogger("SkiingMod");
 
 	@Instance
 	public static Main main;	
@@ -57,7 +65,7 @@ public class Main {
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		
+		registerTileEntities();
 	}
 	
 	@EventHandler
@@ -68,6 +76,10 @@ public class Main {
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event) {
 		
+	}
+
+	private void registerTileEntities() {
+		RegistrationHandler.registerTileEntity(TileEntityControlCabinet.class, "control_cabinet");
 	}
 
 	/**
@@ -115,8 +127,10 @@ public class Main {
 			ItemsRegistry.registerModels();
 			BlocksRegistry.registerModels();
 		}
-		
-		
+
+		private static void registerTileEntity(Class<? extends TileEntity> clazz, String name) {
+			GameRegistry.registerTileEntity(clazz, new ResourceLocation(MOD_ID, name));
+		}
 	}
 }
 
