@@ -85,7 +85,7 @@ public class Main {
 			try {
 				IForgeRegistry<Item> registry = event.getRegistry();
 				ItemsRegistry.register(registry);
-				BlocksRegistry.registerItemBlocks(event.getRegistry());
+				BlocksRegistry.registerItemBlocks(registry);
 			}
 			catch(ArrayIndexOutOfBoundsException ex) {
 				String message = ex.getMessage();
@@ -110,8 +110,6 @@ public class Main {
 			ItemsRegistry.registerModels();
 			BlocksRegistry.registerModels();
 		}
-		
-		
 	}
 }
 

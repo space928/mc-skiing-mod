@@ -23,6 +23,10 @@ plugins {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
+dependencies {
+    implementation 'org.reflections:reflections:0.10.2'
+}
+
 version = '1.0'
 group = 'com.thomas.mc-skiing-mod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'mc-skiing-mod'

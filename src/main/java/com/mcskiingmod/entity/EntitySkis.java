@@ -88,14 +88,14 @@ public class EntitySkis extends EntityBase {
 
     protected void entityInit()
     {
-        this.dataManager.register(TIME_SINCE_HIT, Integer.valueOf(0));
-        this.dataManager.register(FORWARD_DIRECTION, Integer.valueOf(1));
-        this.dataManager.register(DAMAGE_TAKEN, Float.valueOf(0.0F));
-        this.dataManager.register(BOAT_TYPE, Integer.valueOf(EntityBoat.Type.OAK.ordinal()));
+        this.dataManager.register(TIME_SINCE_HIT, 0);
+        this.dataManager.register(FORWARD_DIRECTION, 1);
+        this.dataManager.register(DAMAGE_TAKEN, 0.0F);
+        this.dataManager.register(BOAT_TYPE, EntityBoat.Type.OAK.ordinal());
 
         for (DataParameter<Boolean> dataparameter : DATA_ID_PADDLE)
         {
-            this.dataManager.register(dataparameter, Boolean.valueOf(false));
+            this.dataManager.register(dataparameter, Boolean.FALSE);
         }
     }
 

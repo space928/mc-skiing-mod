@@ -19,8 +19,14 @@ public interface IRegisterable<T> {
 	void updateRegistryAndLocalizedName(String name);
 
 	/**
-	 *
+	 * Creates and returns a new instance of the object to be registered
 	 * @return the object to be added to the registry
 	 */
 	T getRegistrableObject();
+
+	/**
+	 * Returns the registration name of the object.
+	 * @return
+	 */
+	String getRegistrationName();
 }

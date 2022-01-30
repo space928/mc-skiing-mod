@@ -19,7 +19,8 @@ public abstract class ItemShovelBase extends ItemSpade implements IRegisterable<
 		
 		updateRegistryAndLocalizedName(name);
 	}
-	
+
+	@Override
 	public void registerItemModel() {
 		Main.proxy.registerItemRenderer(this, CreativeTabs.COMBAT, name);
 	}
@@ -35,5 +36,10 @@ public abstract class ItemShovelBase extends ItemSpade implements IRegisterable<
 	@Override public ItemShovelBase getRegistrableObject()
 	{
 		return this;
+	}
+
+	@Override public String getRegistrationName()
+	{
+		return name;
 	}
 }
