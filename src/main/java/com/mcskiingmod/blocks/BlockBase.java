@@ -4,7 +4,7 @@ import com.mcskiingmod.Main;
 import com.mcskiingmod.init.BlocksRegistry;
 
 import com.mcskiingmod.items.ItemMachineBlock;
-import com.mcskiingmod.items.IRegisterable;
+import com.mcskiingmod.init.IRegisterable;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,7 +15,7 @@ import net.minecraft.item.ItemBlock;
  * Base class for all blocks defined by mc-skiing-mod
  * Implements the methods necessary for registration by Forge.
  */
-public class BlockBase extends Block implements IRegisterable<BlockBase> {
+public abstract class BlockBase extends Block implements IRegisterable<BlockBase> {
 
     protected String name;
 

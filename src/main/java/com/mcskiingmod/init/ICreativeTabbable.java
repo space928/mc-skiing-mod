@@ -1,4 +1,4 @@
-package com.mcskiingmod.items;
+package com.mcskiingmod.init;
 
 import net.minecraft.creativetab.CreativeTabs;
 

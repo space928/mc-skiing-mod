@@ -6,13 +6,9 @@ import com.mcskiingmod.blocks.BlockBase;
 import com.mcskiingmod.blocks.BlockCompressedCobblestone;
 
 import com.mcskiingmod.blocks.BlockControlCabinet;
-import com.mcskiingmod.items.IRegisterable;
-import com.mcskiingmod.blocks.BlockControlCabinet;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.registries.IForgeRegistry;
-import org.apache.logging.log4j.Level;
 
 /**
  * This class is responsible for registering all the derivatives of {@code BlockBase} in the Forge registry.

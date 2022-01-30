@@ -35,12 +35,14 @@ public class ItemSkis extends ItemBase{
 
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer entityPlayer, EnumHand enumHand) {
         ItemStack heldItem = entityPlayer.getHeldItem(enumHand);
-        float playerPitch = entityPlayer.prevRotationPitch + (entityPlayer.rotationPitch - entityPlayer.prevRotationPitch) * 1.0F;
-        float playerYaw = entityPlayer.prevRotationYaw + (entityPlayer.rotationYaw - entityPlayer.prevRotationYaw) * 1.0F;
-        double playerX = entityPlayer.prevPosX + (entityPlayer.posX - entityPlayer.prevPosX) * 1.0D;
-        double playerY = entityPlayer.prevPosY + (entityPlayer.posY - entityPlayer.prevPosY) * 1.0D + (double)entityPlayer.getEyeHeight();
-        double playerZ = entityPlayer.prevPosZ + (entityPlayer.posZ - entityPlayer.prevPosZ) * 1.0D;
+
+        float playerPitch = entityPlayer.prevRotationPitch + (entityPlayer.rotationPitch - entityPlayer.prevRotationPitch);
+        float playerYaw = entityPlayer.prevRotationYaw + (entityPlayer.rotationYaw - entityPlayer.prevRotationYaw);
+        double playerX = entityPlayer.prevPosX + (entityPlayer.posX - entityPlayer.prevPosX);
+        double playerY = entityPlayer.prevPosY + (entityPlayer.posY - entityPlayer.prevPosY) + (double)entityPlayer.getEyeHeight();
+        double playerZ = entityPlayer.prevPosZ + (entityPlayer.posZ - entityPlayer.prevPosZ);
         Vec3d playerCoords = new Vec3d(playerX, playerY, playerZ);
+
         float cosPlayerYaw = MathHelper.cos(-playerYaw * 0.017453292F - 3.1415927F);
         float sinPlayerYaw = MathHelper.sin(-playerYaw * 0.017453292F - 3.1415927F);
         float cosPlayerPitch = -MathHelper.cos(-playerPitch * 0.017453292F);
@@ -48,6 +50,7 @@ public class ItemSkis extends ItemBase{
         float sinYawXCosPitch = sinPlayerYaw * cosPlayerPitch;
         float cosYawXCostPitch = cosPlayerYaw * cosPlayerPitch;
         Vec3d playerCoordWithDirection = playerCoords.add((double)sinYawXCosPitch * 5.0D, (double)sinPlayerPitch * 5.0D, (double)cosYawXCostPitch * 5.0D);
+
         RayTraceResult rayTraceResult = world.rayTraceBlocks(playerCoords, playerCoordWithDirection, true);
         if (rayTraceResult == null) {
             return new ActionResult(EnumActionResult.PASS, heldItem);

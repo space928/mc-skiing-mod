@@ -2,10 +2,12 @@ package com.mcskiingmod.proxy;
 
 import com.mcskiingmod.Main;
 
+import com.mcskiingmod.RegistrationHandler;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 /**
  * Client-side proxy
@@ -21,5 +23,11 @@ public class ClientProxy extends CommonProxy{
 		//RenderingRegistry.registerEntityRenderingHandler(EntitySkis.class, RenderSkis::new);
 		int metadataValue = 0;
 		ModelLoader.setCustomModelResourceLocation(item, metadataValue, new ModelResourceLocation(Main.MOD_ID + ":" + itemId, "inventory"));
+	}
+
+	@Override
+	public void preInit(FMLPreInitializationEvent event) {
+		RegistrationHandler.registerEntityRenderers();
+		RegistrationHandler.registerTileEntities();
 	}
 }

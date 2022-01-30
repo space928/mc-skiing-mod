@@ -1,13 +1,13 @@
 package com.mcskiingmod.entity;
 
-import com.mcskiingmod.items.ICreativeTabbable;
-import com.mcskiingmod.items.IRegisterable;
+import com.mcskiingmod.init.ICreativeTabbable;
+import com.mcskiingmod.init.IRegisterable;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class EntityBase extends Entity implements IRegisterable<Entity>, ICreativeTabbable<EntityBase>
+public abstract class EntityBase extends Entity implements IRegisterable<Entity>, ICreativeTabbable<EntityBase>
 {
     public EntityBase(World worldIn)
     {
@@ -32,20 +32,5 @@ public class EntityBase extends Entity implements IRegisterable<Entity>, ICreati
     @Override public Entity getRegistrableObject()
     {
         return this;
-    }
-
-    @Override protected void entityInit()
-    {
-
-    }
-
-    @Override protected void readEntityFromNBT(NBTTagCompound compound)
-    {
-
-    }
-
-    @Override protected void writeEntityToNBT(NBTTagCompound compound)
-    {
-
     }
 }

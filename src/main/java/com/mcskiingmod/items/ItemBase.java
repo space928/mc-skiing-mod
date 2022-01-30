@@ -1,6 +1,8 @@
 package com.mcskiingmod.items;
 
 import com.mcskiingmod.Main;
+import com.mcskiingmod.init.ICreativeTabbable;
+import com.mcskiingmod.init.IRegisterable;
 import com.mcskiingmod.init.ItemsRegistry;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -10,7 +12,8 @@ import net.minecraft.item.Item;
  * Base class for all items defined by mc-skiing-mod
  * Implements the methods necessary for registration by Forge.
  */
-public class ItemBase extends Item implements IRegisterable<Item>, ICreativeTabbable<ItemBase> {
+public abstract class ItemBase extends Item implements IRegisterable<Item>, ICreativeTabbable<ItemBase>
+{
 	
 	protected String name;
 

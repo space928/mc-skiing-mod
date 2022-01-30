@@ -1,4 +1,4 @@
-package com.mcskiingmod.items;
+package com.mcskiingmod.init;
 
 /**
  * Implements the methods necessary to be registered in Forge.
