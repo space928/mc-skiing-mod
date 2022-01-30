@@ -103,6 +103,7 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState iBlockState, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		LOGGER.log(Level.INFO, "EnergyStored: " + this.tileEntityControlCabinet.getContainer().getEnergyStored());
 		for (EnumFacing e: EnumFacing.VALUES) {
 			if (this.tileEntityControlCabinet.getCapability(CapabilityEnergy.ENERGY,e) != null) {
 				LOGGER.log(Level.INFO, "Energy: " +
