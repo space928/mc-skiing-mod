@@ -22,6 +22,7 @@ public class ItemsRegistry {
 	public static final AluminumAxe aluminumAxe = new AluminumAxe("aluminum_axe");
 	public static final AluminumShovel aluminumShovel = new AluminumShovel("aluminum_shovel");
 	public static final AluminumHoe aluminumHoe = new AluminumHoe("aluminum_hoe");
+	public static final ItemSwissArmyKnife swissArmyKnife = new ItemSwissArmyKnife("swiss_army_knife");
 	public static final ItemSkis skis = new ItemSkis("skis", net.minecraft.entity.item.EntityBoat.Type.OAK);
 
 	// ===============

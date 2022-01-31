@@ -19,6 +19,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -29,6 +30,7 @@ import org.apache.logging.log4j.Level;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 
 import static com.mcskiingmod.Main.LOGGER;
 
@@ -136,16 +138,8 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 	public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState iBlockState, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (player.isSneaking())
 			return false;
-		for (EnumFacing e: EnumFacing.VALUES) {
-			if (world.getTileEntity(blockPos).getCapability(CapabilityEnergy.ENERGY,e) != null) {
-				LOGGER.log(Level.INFO, "Energy: " +
-						world.getTileEntity(blockPos).getCapability(CapabilityEnergy.ENERGY, e).getEnergyStored() +
-						"/" +
-						world.getTileEntity(blockPos).getCapability(CapabilityEnergy.ENERGY, e).getMaxEnergyStored() +
-						" Face: " +
-						e.name()
-				);
-			}
+		if (world.getTileEntity(blockPos) != null) {
+			player.sendStatusMessage(new TextComponentString("EnergyStored: " + Objects.requireNonNull(world.getTileEntity(blockPos)).getCapability(CapabilityEnergy.ENERGY, null).getEnergyStored()), true);
 		}
 		return true;
 	}
