@@ -119,7 +119,7 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 	@Override
 	public boolean isFullCube(IBlockState state)
 	{
-		return false;
+		return true;
 	}
 
 	// render using a BakedModel (mbe30_inventory_basic.json --> mbe30_inventory_basic_model.json)

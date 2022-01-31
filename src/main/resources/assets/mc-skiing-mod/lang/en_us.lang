@@ -6,4 +6,8 @@ item.aluminum_axe.name=Aluminum Axe
 item.aluminum_shovel.name=Aluminum Shovel
 item.aluminum_hoe.name=Aluminum Hoe
 item.skis_oak.name=Oak Skis
+item.control_cabinet.name=Control Cabinet
+item.swiss_army_knife.name=Swiss Army Knife
+
+
 itemGroup.SkiingMod=Skiing Mod
