@@ -3,6 +3,8 @@ package com.mcskiingmod.blocks;
 import com.google.common.collect.Lists;
 import com.mcskiingmod.Main;
 import com.mcskiingmod.tileentity.TileEntityControlCabinet;
+import dan200.computercraft.api.peripheral.IPeripheral;
+import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -25,13 +27,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Level;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
 import static com.mcskiingmod.Main.LOGGER;
 
-public class BlockControlCabinet extends BlockBase implements ITileEntityProvider {
+public class BlockControlCabinet extends BlockBase implements ITileEntityProvider, IPeripheralProvider {
 	private static final AxisAlignedBB CABINET_BASE = new AxisAlignedBB(0, 0, 0, 1, 1.938, 0.875);
 	private static final AxisAlignedBB LID = new AxisAlignedBB(0, 1.938, 0, 1, 2, 1);
 	private static final AxisAlignedBB FOOT = new AxisAlignedBB(0, 0, 0.875, 1, 0.062, 1);
@@ -133,9 +136,24 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState iBlockState, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (player.isSneaking())
+			return false;
 		if (world.getTileEntity(blockPos) != null) {
 			player.sendStatusMessage(new TextComponentString("EnergyStored: " + Objects.requireNonNull(world.getTileEntity(blockPos)).getCapability(CapabilityEnergy.ENERGY, null).getEnergyStored()), true);
 		}
 		return true;
+	}
+
+	/**
+	 * Produce an peripheral implementation from a block location.
+	 * @see dan200.computercraft.api.ComputerCraftAPI#registerPeripheralProvider(IPeripheralProvider)
+	 * @return a peripheral, or null if there is not a peripheral here you'd like to handle.
+	 */
+
+	@Nullable
+	@Override
+	public IPeripheral getPeripheral(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing side) {
+		TileEntity te = world.getTileEntity(pos);
+		return te instanceof IPeripheral ? (IPeripheral)te : null;
 	}
 }

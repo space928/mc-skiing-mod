@@ -7,12 +7,11 @@ import com.mcskiingmod.blocks.BlockCompressedCobblestone;
 
 import com.mcskiingmod.blocks.BlockControlCabinet;
 import com.mcskiingmod.items.IRegisterable;
-import com.mcskiingmod.blocks.BlockControlCabinet;
+import dan200.computercraft.api.ComputerCraftAPI;
+import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.registries.IForgeRegistry;
-import org.apache.logging.log4j.Level;
 
 /**
  * This class is responsible for registering all the derivatives of {@code BlockBase} in the Forge registry.
@@ -32,6 +31,10 @@ public class BlocksRegistry {
 	public static void register(IForgeRegistry<Block> registry) {
 		for(IRegisterable<BlockBase> block : BLOCKS) {
 			registry.register(block.getRegistrableObject());
+
+			if(block instanceof IPeripheralProvider) {
+				ComputerCraftAPI.registerPeripheralProvider((IPeripheralProvider)block);
+			}
 		}
 	}
 	
