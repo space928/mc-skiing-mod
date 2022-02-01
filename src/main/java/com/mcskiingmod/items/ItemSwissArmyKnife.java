@@ -22,6 +22,7 @@ public class ItemSwissArmyKnife extends ItemBase {
 
     public ItemSwissArmyKnife(String name) {
         super(name);
+        super.setCreativeTab(SKIING_MOD_TAB);
     }
 
     @Override
