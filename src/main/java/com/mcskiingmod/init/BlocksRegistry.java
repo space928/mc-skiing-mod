@@ -6,6 +6,7 @@ import com.mcskiingmod.blocks.BlockBase;
 import com.mcskiingmod.blocks.BlockCompressedCobblestone;
 
 import com.mcskiingmod.blocks.BlockControlCabinet;
+import com.mcskiingmod.blocks.BlockControlCabinet_Top;
 import com.mcskiingmod.items.IRegisterable;
 import dan200.computercraft.api.ComputerCraftAPI;
 import dan200.computercraft.api.peripheral.IPeripheralProvider;
@@ -20,6 +21,7 @@ public class BlocksRegistry {
 	public static final ArrayList<IRegisterable<BlockBase>> BLOCKS = new ArrayList<>();
 	public static final BlockCompressedCobblestone compressedCobblestone = new BlockCompressedCobblestone("compressed_cobblestone");
 	public static final BlockControlCabinet controlCabinet = new BlockControlCabinet("control_cabinet");
+	public static final BlockControlCabinet_Top controlCabinet_top = new BlockControlCabinet_Top("control_cabinet_top");
 
 	// =============== Instantiate all blocks to be registered
 	//This still seems to have a bug with not being registered properly. It doesn't seem point to the correct resource?

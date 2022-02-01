@@ -7,8 +7,10 @@ import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheralProvider;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -23,47 +25,36 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-import static com.mcskiingmod.Main.LOGGER;
-import static com.mcskiingmod.init.BlocksRegistry.BLOCKS;
-
-public class BlockControlCabinet extends BlockBase implements ITileEntityProvider, IPeripheralProvider {
-	private static final AxisAlignedBB CABINET_BASE = new AxisAlignedBB(0, 0, 0, 1, 1.938, 0.875);
-	private static final AxisAlignedBB LID = new AxisAlignedBB(0, 1.938, 0, 1, 2, 1);
-	private static final AxisAlignedBB FOOT = new AxisAlignedBB(0, 0, 0.875, 1, 0.062, 1);
+public class BlockControlCabinet_Top extends BlockBase implements ITileEntityProvider, IPeripheralProvider {
+	private static final AxisAlignedBB CABINET_BASE = new AxisAlignedBB(0, 0-1, 0, 1, 1.938-1, 0.875);
+	private static final AxisAlignedBB LID = new AxisAlignedBB(0, 1.938-1, 0, 1, 2-1, 1);
+	private static final AxisAlignedBB FOOT = new AxisAlignedBB(0, 0-1, 0.875, 1, 0.062-1, 1);
 	private final TileEntityControlCabinet tileEntityControlCabinet;
 	/**
 	 * AxisAlignedBBs and methods getBoundingBox, collisionRayTrace, and collisionRayTrace generated using MrCrayfish's Model Creator <a href="https://mrcrayfish.com/tools?id=mc">https://mrcrayfish.com/tools?id=mc</a>
 	 */
 	private static final List<AxisAlignedBB> COLLISION_BOXES = Lists.newArrayList(CABINET_BASE, LID, FOOT);
-	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0, 0, 0, 1, 2, 1);
+	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0, 0-1, 0, 1, 2-1, 1);
 
-	public BlockControlCabinet(String name) {
+
+	public static final PropertyDirection FACING = PropertyDirection.create("facing");
+
+
+	public BlockControlCabinet_Top(String name) {
 		super(Material.PISTON, name);
 		setHardness(3f);
 		setResistance(5f);
-		super.setCreativeTab(Main.SKIING_MOD_TAB);
 		this.tileEntityControlCabinet = new TileEntityControlCabinet();
 
-	}
-
-	@Override
-	public void onBlockAdded(World world, BlockPos blockPos, IBlockState iBlockState) {
-		if (world.isAirBlock(blockPos.up())) {
-			super.onBlockAdded(world, blockPos, iBlockState);
-			BlockControlCabinet_Top b = (BlockControlCabinet_Top) BLOCKS.get(2);
-			world.setBlockState(blockPos.up(), b.getStateFromMeta(1));
-		}
 	}
 
 	@Override
@@ -115,13 +106,6 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 		return tileEntityControlCabinet;
 	}
 
-	// the block will render in the SOLID layer.  See http://greyminecraftcoder.blogspot.co.at/2014/12/block-rendering-18.html for more information.
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
-	{
-		return BlockRenderLayer.SOLID;
-	}
-
 	// used by the renderer to control lighting and visibility of other blocks.
 	// set to false because this block doesn't fill the entire 1x1x1 space
 	@Override
@@ -143,7 +127,7 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 	// required because the default (super method) is INVISIBLE for BlockContainers.
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState iBlockState) {
-		return EnumBlockRenderType.MODEL;
+		return EnumBlockRenderType.INVISIBLE;
 	}
 
 	@Override
@@ -165,7 +149,24 @@ public class BlockControlCabinet extends BlockBase implements ITileEntityProvide
 	@Nullable
 	@Override
 	public IPeripheral getPeripheral(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing side) {
-		TileEntity te = world.getTileEntity(pos);
+		TileEntity te = world.getTileEntity(pos.down());
 		return te instanceof IPeripheral ? (IPeripheral)te : null;
+	}
+
+
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState()
+				.withProperty(FACING, EnumFacing.byIndex(meta & 7));
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(FACING).getIndex();
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING);
 	}
 }
