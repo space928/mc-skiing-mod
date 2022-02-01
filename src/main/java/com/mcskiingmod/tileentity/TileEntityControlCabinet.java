@@ -91,6 +91,7 @@ public class TileEntityControlCabinet extends TileEntity implements ITickable, I
     @Override
     public void detach(@Nonnull IComputerAccess computer) {
         IPeripheral.super.detach(computer);
+    }
 
     private TileEntity CheckSide(EnumFacing side) {
         int x = 0;
